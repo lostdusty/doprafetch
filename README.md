@@ -4,7 +4,7 @@ DropaFetch is a project made in Go to get system information about your Huawei r
 Currently it supports showing the total system memory and usage, uptime and kernel version. More features will be added as soon as possible.
 
 # Downloads
-Check (https://github.com/princessmortix/dropafetch/releases)[the releases page].
+Check [the releases page](https://github.com/princessmortix/dropafetch/releases).
 
 # How to use this?
 TODO: Finish the readme.
