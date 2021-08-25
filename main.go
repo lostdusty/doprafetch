@@ -38,8 +38,9 @@ func main() {
 	underline("- - - - - - -\n\n")
 	if runtime.GOOS != "linux" { //If the application is running outside a Linux system it will abort.
 		color.Set(color.BgRed)
-		log.Fatalf(linuxonly)
+		fmt.Println(linuxonly)
 		color.Unset()
+		os.Exit(2)
 	}
 
 	info("OS: ")
