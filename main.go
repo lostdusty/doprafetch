@@ -1,3 +1,4 @@
+// +build linux
 package main
 
 import (
@@ -9,32 +10,20 @@ import (
 	"math"
 	"os"
 	"os/exec"
-	"runtime"
 )
 
 var KB = uint64(1024)
 
 func main() {
-	//Strings.
-	red := color.New(color.FgRed).PrintfFunc() //Print strings in red
-	underline := color.New(color.Bold, color.FgBlue).PrintfFunc()
-	info := color.New(color.Bold, color.FgRed).PrintfFunc()
+	red := color.New(color.FgRed).PrintfFunc() //Print text in red
+	underline := color.New(color.Bold, color.FgBlue).PrintfFunc() //Print text with underline
+	info := color.New(color.Bold, color.FgRed).PrintfFunc() //Print text in bold (dark) red
 	errortxt := "DropaFetch failed to run correctly. Aborting.\nDetails: command failed with %s\n"
 
-	//Get system memory
-	mem := sigar.Mem{}
+	mem := sigar.Mem{} //Get system memory with gosigar
 	mem.Get()
 
-	//Start the application
-	if runtime.GOOS != "linux" { //Make sure it's running under a linux system.
-		color.Set(color.BgRed)
-		fmt.Println("Error: DropaFetch should run only on Linux.")
-		color.Unset()
-		os.Exit(2)
-	}
-
-	red("DopraFetch v2\n")
-
+	red("DopraFetch v2\n") // The begin. | TODO: get the information first before printing to console.
 	underline("- - - - - - -\n\n")
 
 	info("OS: ")
@@ -103,7 +92,6 @@ func main() {
 	info("Memory: ")
 	mtotal := ToFloat64(mem.Total)
 	mused := ToFloat64(mem.Used)
-
 	fmt.Print(math.Trunc((mused/2048)/1000), " / ", math.Trunc((mtotal/2048)/1000), " MB\n")
 }
 
